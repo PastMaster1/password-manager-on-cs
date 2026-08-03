@@ -1,0 +1,80 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="Main"
+        xmlns:vm="using:Password_Manager.ViewModels"
+        x:Class="Password_Manager.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Password Manager"
+        Background="Black"
+        Foreground="White"
+        RequestedThemeVariant="Dark">
+
+    <Window.Styles>
+        <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="Gray"/>
+        </Style>
+        <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#1a1a1a"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid ColumnDefinitions="*, 220">
+        
+        <DockPanel Grid.Column="0" Margin="10">
+            <Grid DockPanel.Dock="Top" Height="30" ColumnDefinitions="40, *, *, *, *" Margin="5,0">
+                <TextBlock Grid.Column="0" Text="№" FontWeight="Bold"/>
+                <TextBlock Grid.Column="1" Text="Сервис" FontWeight="Bold"/>
+                <TextBlock Grid.Column="2" Text="Логин" FontWeight="Bold"/>
+                <TextBlock Grid.Column="3" Text="Пароль" FontWeight="Bold"/>
+                <TextBlock Grid.Column="4" Text="Заметки" FontWeight="Bold"/>
+            </Grid>
+            
+            <Separator DockPanel.Dock="Top" Background="#444"/>
+
+            <ListBox Background="Transparent" 
+                     ItemsSource="{Binding InformationAboutUsers}" 
+                     SelectedItem="{Binding SelectedPassword}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="40, *, *, *, *">
+                            <TextBlock Grid.Column="0" Text="{Binding VisualId}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding ServiceName}"/>
+                            <TextBlock Grid.Column="2" Text="**********"/>
+                            <TextBlock Grid.Column="3" Text="**********"/>
+                            <TextBlock Grid.Column="4" Text="**********"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+
+        <Border Grid.Column="1" Background="#1E1E1E" Padding="15">
+            <StackPanel Spacing="10">
+                <TextBlock Text="Управление" FontWeight="Bold" Margin="0,0,0,10"/>
+                
+                <Button Content="➕ Добавить" HorizontalAlignment="Stretch"
+                        Command="{Binding AddUserInformation}"/>
+                
+                <Button Content="👁️ Посмотреть" 
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding ViewUserInformationCommand}"/>
+                
+                <Button Content="✏️ Редактировать" 
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding EditUserInformationCommand}"/>
+                
+                <Button Content="🗑️ Удалить" 
+                        HorizontalAlignment="Stretch"
+                        Background="#442222"
+                        Command="{Binding DeleteUserInformationCommand}"/>
+
+                <Separator Margin="0,10" Background="#333"/>
+                
+                <Button Content="Выход" HorizontalAlignment="Stretch" Background="#333"
+                        Command="{Binding ExitCommand}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+    
+</Window>

@@ -1,0 +1,26 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Password_Manager.ViewModels"
+        x:Class="Password_Manager.Views.SignInWindow"
+        x:DataType="vm:SignInWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="SignInWindow"
+        Background="Black"
+        Foreground="White"
+        Height="200"
+        Width="400"
+        CanResize="False"
+        RequestedThemeVariant="Dark">
+    <Grid ColumnDefinitions="*" RowDefinitions="*, 2*, *, *">
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="30" Text="Авторизация"/>
+        <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" Grid.Row="1">
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="10, 0, 0, 0" VerticalAlignment="Center" Text="Введите логин пользователя: "/>
+            <TextBox Text="{Binding PlainLogin}" Grid.Column="1" Grid.Row="0" Watermark="логин" Width="150"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="10, 0, 0, 0" VerticalAlignment="Center" Text="Введите мастер-пароль: "/>
+            <TextBox Text="{Binding PlainPassword}" Grid.Column="1" Grid.Row="1" Watermark="мастер-пароль" PasswordChar="*" Width="150"/>
+        </Grid>
+        <Button Grid.Row ="2" Margin="10, 0, 0, 0" Width="150" Content="Вход" Command="{Binding SignIn}"
+                ToolTip.Tip="{Binding SignInHint}" ToolTip.ShowOnDisabled="True"/>    
+        <Button Grid.Row ="3" Margin="10, 0, 0, 0" Width="150" Content="Регистрация" Command="{Binding SignUp}" IsEnabled="True"/>    
+    </Grid>
+</Window>
